@@ -112,4 +112,7 @@ height:fit-content;
    .stat,.stat-loader-element{
     width: 100%;
     }  
+    .stat-loader-element{
+      height:120px;
+    }
 }
