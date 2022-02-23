@@ -119,7 +119,9 @@ position: relative;
     .stock-stat h1{
         font-weight: 18px;
     }
-    .stock-stat{
-        margin-bottom:1em;
+
+    .stock{
+      margin-bottom:1em;
     }
+
 }
