@@ -9,7 +9,9 @@ import Login from './components/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useState, useEffect } from "react";
+import {useSelector} from "react-redux";
 function App() {
+   const isDarkmode = useSelector(state=>state)
   const auth = getAuth();
   const [signedIn, setSignedIn] = useState(false)
   useEffect(() => {
@@ -20,7 +22,7 @@ function App() {
   }, [])
   if (signedIn) {
     return (
-      <div className="App">
+      <div className={isDarkmode == "true" ? "App dark-mode-inv" : "App"}>
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<Index />}>
