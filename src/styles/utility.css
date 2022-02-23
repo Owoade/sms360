@@ -186,7 +186,7 @@ button{
     justify-content: center;
     align-items: center;
     background: rgba(22, 22, 22, 0.205);
-    position: absolute;
+    position: fixed;
     overflow: hidden;
     z-index: 3;
     backdrop-filter: blur(10px);
