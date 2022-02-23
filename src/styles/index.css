@@ -1,7 +1,7 @@
 .overview-container{
     padding-top:2em;
     background-color: whitesmoke;
-    height: 100vh;
+    height: 60vh;
     transition: .5s all ease;
 }
 .overview-container-header{
