@@ -34,9 +34,12 @@ const BaseNav = ({active}) => {
     return ( 
         <div className="base-nav">
             <div className="container">
-                <nav>
-                    {filtered_links.map(each => (<Link to={`${each.link_path}`} className={`${each.activeClassName}`}> {each.link_name} </Link>))}
-                </nav>
+                <div className="scroll-wrapper">
+                    <nav>
+                        {filtered_links.map(each => (<Link to={`${each.link_path}`} className={`${each.activeClassName}`}> {each.link_name} </Link>))}
+                    </nav>
+                </div>
+               
             </div>
             
         </div>

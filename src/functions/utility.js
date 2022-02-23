@@ -10,7 +10,17 @@ export function formatCurrency(amount){
                 formattedAmount +=`${each}`;
              }
         })
-    }else if(stringAmount.length == 6){
+    }else if(stringAmount.length == 5){
+      stringAmount.split("").forEach((each,i)=>{
+          if(i==1){
+             formattedAmount +=`${each},`
+          }
+          else{
+             formattedAmount +=`${each}`;
+          }
+     })
+  }
+    else if(stringAmount.length == 6){
         stringAmount.split("").forEach((each,i)=>{
             if(i==2){
                formattedAmount +=`${each},`
@@ -31,7 +41,33 @@ export function formatCurrency(amount){
                formattedAmount +=`${each}`;
             }
        })
-    }else if(stringAmount.length == 10 ){
+    }else if(stringAmount.length == 8){
+      stringAmount.split("").forEach((each,i)=>{
+          if(i==1){
+              formattedAmount +=`${each},`
+           }
+          else if(i==4){
+             formattedAmount +=`${each},`
+          }
+          else{
+             formattedAmount +=`${each}`;
+          }
+     })
+  }
+    else if(stringAmount.length == 9){
+      stringAmount.split("").forEach((each,i)=>{
+          if(i==2){
+              formattedAmount +=`${each},`
+           }
+          else if(i==5){
+             formattedAmount +=`${each},`
+          }
+          else{
+             formattedAmount +=`${each}`;
+          }
+     })
+  }
+    else if(stringAmount.length == 10 ){
         stringAmount.split("").forEach((each,i)=>{
             if(i==0){
                 formattedAmount +=`${each},`

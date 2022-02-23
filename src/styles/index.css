@@ -53,3 +53,51 @@
 .index-header{
     transition: all .5s ease;
 }
+
+/* placeholder loading */
+
+.stat-loader-element{
+    width: 260px;
+    background: white;
+    border-radius: 20px;
+    position: relative;
+    height: 120px;
+       padding-right: 5em;
+       box-shadow:  20px 20px 60px #e9e7e7,
+                -20px -20px 60px #ffffff;
+    
+}
+.stat-loader-element::before {
+    content: '';
+    display: block;
+    position: absolute;
+    /* left: -100px; */
+    top: 0;
+    height: 100%;
+    width: 100px;
+    background: linear-gradient(to left, transparent 0%, #e8e8e831 50%, transparent 75%);
+    animation: load 1.5s cubic-bezier(0.4, 0.0, 0.2, 1) alternate infinite;
+}
+@keyframes load {
+    from {
+        left: -20px;
+        opacity: .5;
+    }
+    to   {
+        left: 80%;
+        opacity: 0;
+    }
+}
+@media(max-width:1100px){
+    .stat-cards{
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    
+    }
+}
+@media(max-width:1100px){
+    h2{
+        font-size: 20px;
+    }
+}

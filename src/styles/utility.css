@@ -39,6 +39,49 @@ header{
 header .right{
     display: flex;
 }
+.base-nav {
+    /* background: white; */
+    overflow-x: hidden;
+  }
+  
+  .base-nav .container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  
+  .base-nav .container::-webkit-scrollbar {
+    width: 1px;
+    opacity: 0;
+    background-color: transperent;
+  }
+  
+  .base-nav .container::-webkit-scrollbar-track {
+    background-color: transparent;
+    width: 10px;
+  }
+  
+  .base-nav .container::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 20px;
+    width: 1px;
+    opacity: 0;
+  }
+  
+  .base-nav nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 1000px;
+   
+  }
+  .base-nav nav a{
+      display: block;
+
+  }
+  .base-nav .scroll-wrapper{
+      width: 100%;
+      overflow-x: scroll;
+  }
 .bg-toggle{
     border-radius: 50px;
 background: white;
@@ -211,4 +254,22 @@ button{
     border: none;
     border-bottom:1px solid black;
     border-radius: 0;
+}
+
+@media(max-width:1000px){
+    .base-nav nav {
+        width: 1000px;
+       
+      }
+}
+@media(max-width:500px){
+    .container{
+        width: 90%;
+    }
+    .flex-space-btw{
+        display:block;
+    }
+    .main-card{
+        width: 300px;
+    }
 }

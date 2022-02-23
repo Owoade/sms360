@@ -76,3 +76,47 @@
     padding: .5em;
     font-weight: bolder;
 }
+/* Stock darkmode */
+
+.stock-loader-element{
+    background-color: white;
+    width:300px;
+    padding: 1.3em;
+    border-radius: 20px;
+    box-shadow:  20px 20px 60px #bebebe,
+-20px -20px 60px #ffffff;
+height: 200px;
+position: relative;
+
+}
+.stock-loader-element::before {
+    content: '';
+    display: block;
+    position: absolute;
+    /* left: -100px; */
+    top: 0;
+    height: 100%;
+    width: 100px;
+    background: linear-gradient(to left, transparent 0%, #e8e8e831 50%, transparent 75%);
+    animation: load 1.5s cubic-bezier(0.4, 0.0, 0.2, 1) alternate infinite;
+}
+
+@keyframes load {
+    from {
+        left: -20px;
+        opacity: .5;
+    }
+    to   {
+        left: 80%;
+        opacity: 0;
+    }
+}
+
+@media(max-width:500px){
+    .line{
+        display: none;
+    }
+    .stock-stat h1{
+        font-weight: 18px;
+    }
+}

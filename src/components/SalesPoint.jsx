@@ -2,7 +2,7 @@ import Header from "./sub-components/Header";
 import BaseNav from "./sub-components/BaseNav";
 import ".././styles/sales.css"
 import { useSelector } from "react-redux";
-import { onSnapshot, collection, query, where } from "firebase/firestore";
+import { onSnapshot, collection, query, where, updateDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useState, useEffect } from "react";
 import { getCurrencySymbol, formatCurrency } from "../functions/utility";
@@ -30,7 +30,7 @@ const SalesPoint = () => {
             const q = query(collection(db, "store"), where("email", "==", user_key));
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 const data_array = [];
-                querySnapshot.forEach(each => setSession(each.data()))
+                querySnapshot.forEach(each => setSession({ ...each.data(), id: each.id }))
 
             });
         }
@@ -39,16 +39,16 @@ const SalesPoint = () => {
     function addToPurchase(e) {
         e.preventDefault();
         if (item != null) {
-            if (session.stocks.filter(each => each.stockName == item).map(each => each.stockUnit - stockUnit)[0] > 0 ) {
-                if(stockUnit > 0){
+            if (session.stocks.filter(each => each.stockName == item).map(each => each.stockUnit - stockUnit)[0] >= 0) {
+                if (stockUnit > 0) {
                     if (purchases.map(each => each.item).includes(item)) {
                         setPurchases(purchases.map(each => each.item == item ? { ...each, stockUnit, price: Math.round(session.stocks.filter(each => each.stockName == item)[0].stockValue * stockUnit) } : each))
                     } else {
                         setPurchases([...purchases, { item, stockUnit, price: Math.round(session.stocks.filter(each => each.stockName == item)[0].stockValue * stockUnit) }])
                     }
                 }
-             
-               
+
+
             } else {
                 setError("The number of available stock is too low for this amount to be purchased")
             }
@@ -56,31 +56,44 @@ const SalesPoint = () => {
         }
         console.log(purchases)
     }
-    function printReciept(){
-        if(purchases.length != 0){
-           const doc = new jsPDF('p', 'mm', [130, 100]);
-            doc.text('sms360', 40, 10)
-            doc.setFontSize(11)
-            doc.text('Sales reciept', 38, 18)
-            doc.text(`Store name: ${session.storeName}`, 10, 30)
-            doc.text('Items purchased', 10, 40)
+    async function printReciept() {
+        if (purchases.length != 0) {
+            // Reduce stock
+            const storeRef = doc(db, "store", session.id);
+            // Array that holds changes in stock after purchase hase been made
+            const reducedStock = []
+
+            session.stocks.forEach((stock) => {
+              const result =  purchases.map(each => each.item == stock.stockName ? {...stock,stockUnit:parseInt(stock.stockUnit)-parseInt(each.stockUnit),totalUnitSold:parseInt(each.stockUnit) + parseInt(stock.totalUnitSold),totalAmountSold:parseInt(stock.totalAmountSold)+parseInt(each.price)} : null)
+              reducedStock.push( result[0] != null ? result[0] : stock)
+            })
+            await updateDoc(storeRef, {
+                stocks: reducedStock
+            });
+            // Reciept generation
+            const pdf = new jsPDF('p', 'mm', [130, 100]);
+            pdf.text('sms360', 40, 10)
+            pdf.setFontSize(11)
+            pdf.text('Sales reciept', 38, 18)
+            pdf.text(`Store name: ${session.storeName}`, 10, 30)
+            pdf.text('Items purchased', 10, 40)
 
 
-            doc.addFont('helvetica', "bold")
-            doc.setFontSize(8)
-             purchases.forEach((each,i)=>{
-                doc.text(10 , 50+ (i*5), `${each.item}   ${each.stockUnit} units   ${getCurrencySymbol(session.baseCurrency)}${formatCurrency(each.price)}`)
-             })
-             doc.setFontSize(11)
-             doc.text(10 , 60+ (purchases.length*5), `Total price:${getCurrencySymbol(session.baseCurrency)} ${formatCurrency(sumArray(purchases.map(each => each.price)))}`)
-             doc.text(10 , 70+ (purchases.length*5), `https://sales.sms360.vercel.app/?sId=${session.storeName.slice(0,3)}_${Date.now().toString().slice(7,10)}`)
+            pdf.addFont('helvetica', "bold")
+            pdf.setFontSize(8)
+            purchases.forEach((each, i) => {
+                pdf.text(10, 50 + (i * 5), `${each.item}   ${each.stockUnit} units   ${getCurrencySymbol(session.baseCurrency)}${formatCurrency(each.price)}`)
+            })
+            pdf.setFontSize(11)
+            pdf.text(10, 60 + (purchases.length * 5), `Total price:${getCurrencySymbol(session.baseCurrency)} ${formatCurrency(sumArray(purchases.map(each => each.price)))}`)
+            pdf.text(10, 70 + (purchases.length * 5), `https://sales.sms360.vercel.app/?sId=${session.storeName.slice(0, 3)}_${Date.now().toString().slice(7, 10)}`)
             // doc.text(10, 20, 'This is the second title.')
             // doc.text(10, 30, 'This is the thrid title.')
 
 
-            doc.save(`reciept_ ${Date.now()}.pdf`)
+            pdf.save(`reciept_ ${Date.now()}.pdf`)
         }
-       
+
     }
     return (
         <div className="sales-container">

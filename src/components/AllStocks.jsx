@@ -3,7 +3,7 @@ import BaseNav from "./sub-components/BaseNav";
 import { useSelector } from "react-redux";
 import "../styles/allstocks.css";
 import NewStock from "./sub-components/addStockForm"
-import { onSnapshot, collection,query,where,doc,updateDoc,deleteDoc } from "firebase/firestore";
+import { onSnapshot, collection,query,where,doc,updateDoc,deleteDoc,getDocs } from "firebase/firestore";
 import { useState,useEffect } from "react";
 import { db } from "../firebase";
 import {formatCurrency, getCurrencySymbol } from "../functions/utility"
@@ -55,7 +55,7 @@ const AllStocks = () => {
       async function editStock(e){
           setLoading(true)
           e.preventDefault()
-          alert(editState)
+        //   alert(editState)
         const storeRef = doc(db, "store", session.id);
         if(editState== "Increase"){
             await updateDoc(storeRef, {
@@ -125,10 +125,10 @@ const AllStocks = () => {
             </div>
             <div className={isDarkmode == "true" ? "main-container dark-mode-inv" : "main-container"}>
                { session && <div className="container">
-                    <div className="utility-header flex-space-btw">
+               <div className="utility-header flex-space-btw">
                         <h2>All stocks</h2>
                         <button className={isDarkmode == "true" ? "light-mode  btn-add-new" : "btn-add-new "} onClick={()=>setAddStock(true)}> <i className="ri-add-line"></i>Add new stock</button>
-                    </div>
+                        </div> 
                    { session.stocks.length > 0 ? <div className="stocks">
                        {
                            session.stocks.map(each=>( <div className={isDarkmode == "true" ? "stock dark-mode-deep dark-mode-shadow" : "stock"} >
@@ -150,7 +150,7 @@ const AllStocks = () => {
                                </div>
                            </div>
                            <div className="stock-footer flex-space-btw">
-                               <span className="amount-sold">{getCurrencySymbol(session.baseCurrency)} {each.totalAmountSold} sold out</span>
+                               <span className="amount-sold">{getCurrencySymbol(session.baseCurrency)}{formatCurrency(Math.round(each.totalAmountSold))} sold out</span>
                                <button className="btn" onClick={()=>setAddMore([each.stockName,each.stockUnit])}>Add / Reduce </button>
                            </div>
                            </div>    
@@ -161,6 +161,23 @@ const AllStocks = () => {
                         
                     </div> : <span style={{textAlign:"center",margin:"3em 0",display:"block",fontWeight:"bolder"}}>No stocks for now</span>}
                 </div>}
+                       { 
+                           !session &&      <div className="container">
+                          <div className="utility-header flex-space-btw">
+                        <h2>All stocks</h2>
+                        <button className={isDarkmode == "true" ? "light-mode  btn-add-new" : "btn-add-new "} onClick={()=>setAddStock(true)}> <i className="ri-add-line"></i>Add new stock</button>
+                        </div> 
+                           <div className="stocks">
+                               <div className={isDarkmode == "true" ? "stock-loader-element dark-mode-deep dark-mode-shadow" : "stock-loader-element"} ></div>
+                               <div className={isDarkmode == "true" ? "stock-loader-element dark-mode-deep dark-mode-shadow" : "stock-loader-element"} ></div>
+                               <div className={isDarkmode == "true" ? "stock-loader-element dark-mode-deep dark-mode-shadow" : "stock-loader-element"} ></div>
+                               <div className={isDarkmode == "true" ? "stock-loader-element dark-mode-deep dark-mode-shadow" : "stock-loader-element"} ></div>
+                               <div className={isDarkmode == "true" ? "stock-loader-element dark-mode-deep dark-mode-shadow" : "stock-loader-element"} ></div>
+                               <div className={isDarkmode == "true" ? "stock-loader-element dark-mode-deep dark-mode-shadow" : "stock-loader-element"} ></div>
+                           </div>
+                       </div>
+                       
+                       }
             </div>
 
         </div>

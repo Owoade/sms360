@@ -21,3 +21,14 @@
     background-color: black;
     color: white;
 }
+@media(max-width:500px){
+    .settings{
+        display: block;
+        margin: 0 auto;
+    }
+    .setting{
+        display: block;
+        width: 100%;
+
+    }
+}

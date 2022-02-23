@@ -3,21 +3,25 @@ import Header from "./sub-components/Header";
 import  "../styles/index.css"
 import { useState,useEffect } from "react";
 import { useSelector} from "react-redux";
-import { onSnapshot, collection,query,where } from "firebase/firestore";
+import { onSnapshot, collection,query,where,getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import {formatCurrency,getCurrencySymbol } from "../functions/utility"
+import { useNavigate } from "react-router-dom";
 const Index = () => {
-
+    const navigate = useNavigate()
     const isDarkmode = useSelector(state=>state)
     const user_key=localStorage.getItem("user");
     const [session,setSession]=useState(null);
     useEffect(()=>{
-        const q = query(collection(db, "store"), where("email", "==", user_key));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const data_array = [];
-            querySnapshot.forEach(each => setSession(each.data()))
-            
-          });
+        if(session == null){
+            const q = query(collection(db, "store"), where("email", "==", user_key));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const data_array = [];
+                querySnapshot.forEach(each => setSession({...each.data(),id:each.id}))
+                // setSession(querySnapshot.data())
+                // console.log(session)
+              }); 
+        }
     },[session])
 
     function sumArray(arr){
@@ -39,7 +43,8 @@ const Index = () => {
                 <BaseNav active="Overview" />
             </div>
             {/* {session && <span>{session.email}</span>} */}
-               
+
+
                 <div className={isDarkmode == "true" ? "overview-container dark-mode-inv" : "overview-container"}>
                     <div className="container">
                         <div className="overview-container-header">
@@ -55,7 +60,7 @@ const Index = () => {
                              </div>     
                             <div className={isDarkmode == "true" ? "stat dark-mode-deep dark-mode-shadow" : "stat"}>
                                 <h4 className={isDarkmode == "true" ? "dark-mode-inv-text" : "null"}>Total stock sold out </h4>
-                                <h2><span>{getCurrencySymbol(session.baseCurrency)}</span>{sumArray(session.stocks.map(each=>each.totalUnitSold))}</h2>
+                                <h2><span>{getCurrencySymbol(session.baseCurrency)}</span>{formatCurrency(Math.floor(sumArray(session.stocks.map(each=>each.totalAmountSold))))}</h2>
                                 <i className={isDarkmode == "true" ? "dark-mode-inv-text ri-share-forward-fill" : "ri-share-forward-fill"}></i>
                              </div>     
                             <div className={isDarkmode == "true" ? "stat dark-mode-deep dark-mode-shadow" : "stat"}>
@@ -64,12 +69,23 @@ const Index = () => {
                                 <i className={isDarkmode == "true" ? "dark-mode-inv-text ri-stack-fill" : "ri-stack-fill"}></i>
                              </div>     
                          </div>
+                        }{
+                            !session && <div className="stat-cards">
+                           <div  className={isDarkmode == "true" ? "stat-loader-element dark-mode-deep dark-mode-shadow" : "stat-loader-element"}>
+                               </div>    
+                           <div  className={isDarkmode == "true" ? "stat-loader-element dark-mode-deep dark-mode-shadow" : "stat-loader-element"}>
+                               </div>    
+                           <div  className={isDarkmode == "true" ? "stat-loader-element dark-mode-deep dark-mode-shadow" : "stat-loader-element"}>
+                               </div>    
+                              
+                         </div>
                         }
                     </div>
                     
                 </div>
         </div>
-     );
+     )
+  
 }
  
 export default Index;
