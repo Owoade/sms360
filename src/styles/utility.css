@@ -266,7 +266,7 @@ button{
     .container{
         width: 90%;
     }
-    .flex-space-btw{
+   .sales-container .flex-space-btw{
         display:block;
     }
     .main-card{
