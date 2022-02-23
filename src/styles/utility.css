@@ -80,7 +80,7 @@ header .right{
   }
   .base-nav .scroll-wrapper{
       width: 100%;
-      overflow-x: scroll;
+/*       overflow-x: scroll; */
   }
 .bg-toggle{
     border-radius: 50px;
