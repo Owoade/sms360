@@ -37,7 +37,7 @@ const Settings = () => {
           e.preventDefault();
           if(currency != null){
             try{
-                const request = await fetch(`https://v6.exchangerate-api.com/v6/a94560461fb8ccb0ce0170b7/latest/${session.baseCurrency}`);
+                const request = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.EXCHANGE_RATE_API_KEY}/latest/${session.baseCurrency}`);
                 const result = await request.json()
                 const rateIndex = Object.keys(result.conversion_rates).indexOf(currency)
                 const rate =  Object.values(result.conversion_rates)[rateIndex];
