@@ -89,9 +89,9 @@ const AllStocks = () => {
                 <div className="main-card" >
                     <form action="" onSubmit={e=>pushStock(e)}>
                         <h1>Add new stock</h1>
-                        <input type="text" value={stockName} placeholder="Enter stock name" className="form-control form-input" onChange={(e)=>setStockName(e.target.value)} />
-                        <input type="number" value={stockValue} placeholder="Enter stock value" className="form-control form-input"  onChange={(e)=>setStockValue(e.target.value)}/>
-                        <input type="number" value={stockUnit} placeholder="Enter stock unit" className="form-control form-input"  onChange={(e)=>setStockUnit(e.target.value)}/>
+                        <input type="text" value={stockName} placeholder="Enter stock name" className="form-control form-input" onChange={(e)=>setStockName(e.target.value)} required />
+                        <input type="number" value={stockValue} placeholder="Enter stock value" className="form-control form-input"  onChange={(e)=>setStockValue(e.target.value)} required/>
+                        <input type="number" value={stockUnit} placeholder="Enter stock unit" className="form-control form-input"  onChange={(e)=>setStockUnit(e.target.value)} required />
                         {!loading && <button className="form-control form-btn" type="submit">Add stock</button>}
                         {loading && <button className="form-control form-btn" disabled type="submit">Adding stock....</button> }
                         <span style={{textAlign:"center",display:"block"}}  onClick={()=> setAddStock(null)}>Cancel</span>
