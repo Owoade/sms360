@@ -132,4 +132,7 @@
     .log-notification{
         width: 120px;
     }
+    .activity-flex-wrapper{
+    display: block;
+}
 }
