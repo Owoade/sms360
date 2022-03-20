@@ -1,0 +1,281 @@
+*{
+    margin: 0;
+    box-sizing:border-box;
+}
+
+body{
+/* font-family: 'Questrial', sans-serif; */
+font-family: 'Zen Kaku Gothic Antique', sans-serif;
+overflow-x: hidden;
+}
+
+.logo{
+    font-family: 'Redressed', cursive;
+    font-size: 28px;
+}
+.container{
+    width: 70%;
+    margin: auto;
+}
+header .container{
+    display: flex;
+    justify-content: space-between;
+    transition: .5s ease;
+}
+header{
+    /* background-color: white; */
+    padding: 30px 0;
+}
+.company-name{
+    background: grey;
+    font-weight: bolder;
+    color: white;
+    width: fit-content;
+    border-radius: 20px;
+    width: 120px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header .right{
+    display: flex;
+}
+.base-nav {
+    /* background: white; */
+    overflow-x: hidden;
+  }
+  
+  .base-nav .container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  
+  .base-nav .container::-webkit-scrollbar {
+    width: 1px;
+    opacity: 0;
+    background-color: transperent;
+  }
+  
+  .base-nav .container::-webkit-scrollbar-track {
+    background-color: transparent;
+    width: 10px;
+  }
+  
+  .base-nav .container::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 20px;
+    width: 1px;
+    opacity: 0;
+  }
+  
+  .base-nav nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 1000px;
+   
+  }
+  .base-nav nav a{
+      display: block;
+
+  }
+  .base-nav .scroll-wrapper{
+      width: 100%;
+      /* overflow-x: scroll; */
+  }
+.bg-toggle{
+    border-radius: 50px;
+background: white;
+box-shadow:  20px 20px 60px #bebebe,
+-20px -20px 60px #ffffff;
+ display: inline-block;  
+ background-color: transparent;
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;    
+ display: flex;
+ justify-content: center;
+ margin: 0 30px;
+ align-items: center; 
+ border:2px solid rgb(230, 229, 229);     
+}
+header button{
+    height: 30px;
+    width: 100px;
+    transform: translateY(.4em);
+    background-color: transparent;
+    border: 1px solid rgb(224, 224, 224) ;
+    font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
+nav a{
+    color: rgb(141, 141, 141);
+    display: inline-block;
+    margin-right: 1em ;
+    text-decoration: none;
+}
+.base-nav{
+    padding-bottom: 1em;
+}
+
+button{
+    border-radius: 10px;
+    outline: none;
+}
+
+/* Utilty */
+
+.dark-mode{
+    background-color: rgb(37, 37, 37) !important;
+    color: white;
+    
+}
+.dark-mode-inv{
+    background-color: rgb(54, 54, 54) !important;
+    color: white;
+}
+.dark-mode-shadow{
+    box-shadow:  20px 20px 60px #0c0c0ca8,
+             -20px -20px 60px #050505a6  !important;
+}
+.dark-mode-deep{
+    background-color: black !important;
+    color:white;
+    border: 1px solid rgb(77, 76, 76);
+}
+.dark-mode-form-input{
+    color: white !important;
+    border-color: white !important;
+}
+.light-mode{
+    background-color: white !important;
+    color: black !important;
+}
+.active-dark{
+    font-weight: bolder;
+
+}
+.active-light{
+    color:black !important;
+    font-weight: bolder;
+}
+.dark-mode-inv-text{
+    color: rgb(207, 207, 207) !important;
+}
+.btn-add-new{
+    background-color: black;
+    color: white;
+    border: none;
+    width: 130px;
+    font-weight: bolder;
+}
+.flex-space-btw{
+    display: flex;
+    justify-content: space-between;
+}
+.main-container{
+    background-color: whitesmoke;
+}
+.utility-wrapper{
+    transition: .5s ease;
+}
+
+/* Component utility */
+.add-container{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: rgba(22, 22, 22, 0.205);
+    position: absolute;
+    overflow: hidden;
+    z-index: 3;
+    backdrop-filter: blur(10px);
+}
+.main-card{
+    width: 350px;
+    border-radius: 20px;
+    background-color: white;
+    padding: 1em;
+}
+.main-card h1{
+    text-align: center;
+    color: black;
+}
+.main-card p{
+    color: black;
+}
+.main-card button{
+    background: #000;
+    color:white;
+}
+.form-control{
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 1px;
+    outline: none;
+}
+.form-btn{
+    border: none;
+    padding: 10px 0;
+}
+.form-input{
+    border-bottom: 1px solid inherit;
+    padding: 10px;
+}
+.form-select{
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+
+
+/* Login styles */
+
+.login-container{
+    padding-top: 3em;
+    width: 100vw;
+    height: 100vh;
+    background-color: whitesmoke;
+    transform: translateY(-2em);
+}
+.login-container span, .login-container p{
+    display: block;
+    text-align: center;
+    margin: 1em 0;
+    cursor: pointer;
+}
+.main-card{
+    width: 300px;
+    margin: 0 auto;
+    box-shadow:  20px 20px 60px #bebebe,
+    -20px -20px 60px #ffffff;
+}
+.main-card input{
+    border: none;
+    border-bottom:1px solid black;
+    border-radius: 0;
+}
+
+@media(max-width:1000px){
+    .base-nav nav {
+        width: 1000px;
+       
+      }
+}
+@media(max-width:500px){
+    .container{
+        width: 90%;
+    }
+    .flex-space-btw{
+        display:block;
+    }
+    .main-card{
+        width: 300px;
+    }
+}

@@ -1,0 +1,135 @@
+.activity-container{
+    padding: 1em;
+    width:100%;
+    background-color: white;
+    margin: 2em 0;
+    border-radius: 20px;
+    box-shadow:  20px 20px 60px #bebebe,
+             -20px -20px 60px #ffffff;
+}
+.cluster{
+    margin: 1em 0;
+}
+.activity-flex-wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 98%;
+}
+.stock-tag{
+    border-radius: 20px;
+    padding: .3em .5em;
+    font-weight: bolder;
+    margin:1em 0 .8em 0;
+    display:block;
+    width: fit-content;
+    background-color: black;
+    color: white;
+}
+.log-info{
+    margin: .5em 0;
+}
+.log-date{
+    color: grey;
+}
+.rate-tag{
+    color:white;
+    display: block;
+    border-radius: 5px;
+    padding:0px 5px 2px 5px ;
+    height: fit-content;
+    margin-left: .8em;
+    transform: translateY(.3em);
+}
+.credit{
+   background-color: green;
+}
+.debit{
+    background-color:red;
+}
+
+/* Loading effect */
+.loader-element{
+    background-color: rgba(245, 245, 245, 0.411);
+    position: relative;
+}
+.loader-cluster-header{
+    width: 150px;
+    border-radius: 20px;
+    height: 20px;
+    margin-bottom: 1em;
+    position: relative;
+}
+
+.log-notification{
+    width: 600px;
+    height: 7px;
+    border-radius: 20px;
+    margin: .5em 0;
+    position: relative;
+}
+.log-wrapper{
+   margin: .8em 0;
+}
+.loader-log-date{
+    width: 50px;
+    height: 7px;
+    border-radius: 20px;
+}
+.log-rate-tag{
+    width: 60px;
+    height: 20px;
+    border-radius: 5px;
+    margin-left: .8em;
+}
+.loader-log-date::before,.log-rate-tag::before{
+    animation: load-2 1.5s cubic-bezier(0.4, 0.0, 0.2, 1) alternate infinite;
+    content: '';
+    display: block;
+    position: absolute;
+    /* left: -100px; */
+    top: 0;
+    height: 100%;
+    width: 10px;
+    background: linear-gradient(to left, transparent 0%, #e8e8e8da 50%, transparent 75%);
+}
+.loader-cluster-header::before,.log-notification::before {
+    content: '';
+    display: block;
+    position: absolute;
+    /* left: -100px; */
+    top: 0;
+    height: 100%;
+    width: 100px;
+    background: linear-gradient(to left, transparent 0%, #e8e8e8da 50%, transparent 75%);
+    animation: load 1.5s cubic-bezier(0.4, 0.0, 0.2, 1) alternate infinite;
+}
+@keyframes load {
+    from {
+        left: -5px;
+        opacity: .5;
+    }
+    to   {
+        left: 10%;
+        opacity: 0;
+    }
+}
+@keyframes load-2 {
+    from {
+        left: -2px;
+        opacity: .5;
+    }
+    to   {
+        left: 50%;
+        opacity: 0;
+    }
+}
+@media(max-width:1200px){
+    .log-notification{
+        width: 400px;
+    }
+}
+@media(max-width:600px){
+    .log-notification{
+        width: 120px;
+    }
+}

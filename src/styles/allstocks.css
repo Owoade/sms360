@@ -1,0 +1,122 @@
+.main-container {
+    height: 100vh;
+    padding-top: 2em;
+    /* transition: all .5s ease; */
+
+}
+.stocks{
+    margin: 3em 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap:1em ;
+}
+.stock{
+    background-color: white;
+    width:300px;
+    padding: 1.3em;
+    border-radius: 20px;
+    box-shadow:  20px 20px 60px #bebebe,
+-20px -20px 60px #ffffff;
+}
+.stock-status{
+    display: block;
+    position: relative;
+    color: red;
+    font-weight: bold;
+    margin: .5em 0;
+    display: block;
+    width: fit-content;
+}
+.in-stock{
+    color: green !important;
+}
+.in-stock::after{ background-color: green !important;}
+.stock-status::after{
+    content: "";
+    background-color: inherit;
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: -40px;
+    margin-right: 1em;
+    display: block;
+    transform: translateY(-.3em);
+}
+.stock-stats{
+    width: 100%;
+}
+.stock-stat strong{
+    color: #5e5e5e;
+}
+.stock-stat h1 span{
+    font-weight: bolder;
+}
+.stock-footer{
+    margin-top: 2em;
+    width: 100%;
+}
+.line{
+    background-color:  rgb(182, 182, 182);
+    width: 1px;
+    height: 50px;
+    transform: translateY(.8em);
+}
+.stock-footer span{
+    display: block;
+}
+.stock-footer button{
+    background-color: black;
+    color: white;
+    border: none;
+    width: fit-content;
+    padding: .5em;
+    font-weight: bolder;
+}
+/* Stock darkmode */
+
+.stock-loader-element{
+    background-color: white;
+    width:300px;
+    padding: 1.3em;
+    border-radius: 20px;
+    box-shadow:  20px 20px 60px #bebebe,
+-20px -20px 60px #ffffff;
+height: 200px;
+position: relative;
+
+}
+.stock-loader-element::before {
+    content: '';
+    display: block;
+    position: absolute;
+    /* left: -100px; */
+    top: 0;
+    height: 100%;
+    width: 100px;
+    background: linear-gradient(to left, transparent 0%, #e8e8e831 50%, transparent 75%);
+    animation: load 1.5s cubic-bezier(0.4, 0.0, 0.2, 1) alternate infinite;
+}
+
+@keyframes load {
+    from {
+        left: -20px;
+        opacity: .5;
+    }
+    to   {
+        left: 80%;
+        opacity: 0;
+    }
+}
+
+@media(max-width:500px){
+    .line{
+        display: none;
+    }
+    .stock-stat h1{
+        font-weight: 18px;
+    }
+}

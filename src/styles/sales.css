@@ -1,0 +1,44 @@
+.sales-form{
+    padding: 2em;
+    border-radius: 20px;
+    width: 40%;
+    background-color: white;
+    height: fit-content;
+}
+.sales-form input,.sales-form select{
+    border:none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    border-radius: 0;
+    color: black;
+}
+.sales-form button{
+    background-color: black;
+    color: white;
+}
+.reciept{
+    width: 300px;
+    border: 1px solid rgb(160, 159, 159);
+    background-color: white;
+    color: black;
+    padding: 10px;
+}
+.reciept .logo{
+    text-align: center;
+    color:black;
+    display: block;
+}
+.item span{
+    display: inline-block;
+    margin-right: .5em;
+}
+
+@media(max-width:500px){
+    .sales-form{
+        width: 100%;
+        margin-bottom:1em ;
+    }
+    .reciept{
+        width: 100%;
+    }
+}
