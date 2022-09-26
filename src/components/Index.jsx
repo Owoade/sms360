@@ -21,7 +21,7 @@ const Index = () => {
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 const data_array = [];
                 querySnapshot.forEach(each => setSession({ ...each.data(), id: each.id }))
-                // setSession(querySnapshot.data())
+                setSession(querySnapshot.data())
                 // console.log(session)
             });
         }
