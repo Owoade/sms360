@@ -20,7 +20,10 @@ const Index = () => {
             const q = query(collection(db, "store"), where("email", "==", user_key));
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 const data_array = [];
-                querySnapshot.forEach(each => setSession({ ...each.data(), id: each.id }))
+                querySnapshot.forEach(each =>{ 
+                    setSession({ ...each.data(), id: each.id })
+                    console.log(each.data());
+                })
 //                 setSession(querySnapshot.data())
                 // console.log(session)
             });
