@@ -22,7 +22,6 @@ const Index = () => {
                 const data_array = [];
                 querySnapshot.forEach(each =>{ 
                     setSession({ ...each.data(), id: each.id })
-                    console.log(each.data());
                 })
 //                 setSession(querySnapshot.data())
                 // console.log(session)
