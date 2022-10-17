@@ -17,14 +17,14 @@ const Index = () => {
     const [session, setSession] = useState(null);
     useEffect(() => {
         if (session == null) {
-            const q = query(collection(db, "store"), where("email", "==", user_key));
-            const unsubscribe = onSnapshot(q, (querySnapshot) => {
-                const data_array = [];
-                querySnapshot.forEach(each =>{ 
+            const q = query(collection(db, "store"), where("email", "==", user_key));           
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
                     setSession({ ...each.data(), id: each.id })
-                })
+                });
+
 //                 setSession(querySnapshot.data())
-                // console.log(session)
+                console.log(session)
             });
         }
     }, [session])
