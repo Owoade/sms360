@@ -160,10 +160,10 @@ export function formatDate(year,month,date,timeStamp){
          formattedDate = `${myDate.getHours() - timeStamp.hour}h ago`
       }
    }else if(date < myDate.getDate() && month == myDate.getMonth()){
-      alert(4)
+//       alert(4)
       formattedDate = `${myDate.getDate() - date}d ago`
    }else{
-      alert(5)
+//       alert(5)
       formattedDate = `${date}-${month++}-${year}`
    }
    console.log(formattedDate)
