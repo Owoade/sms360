@@ -15,17 +15,16 @@ const Index = () => {
     const isDarkmode = useSelector(state => state)
     const user_key = localStorage.getItem("user");
     const [session, setSession] = useState(null);
-    useEffect(() => {
+    useEffect( async () => {
         if (session == null) {
             const q = query(collection(db, "store"), where("email", "==", user_key));           
-                const querySnapshot = await getDocs(q);
-                querySnapshot.forEach((doc) => {
-                    setSession({ ...each.data(), id: each.id })
-                });
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                setSession({ ...each.data(), id: each.id })
+            });
 
 //                 setSession(querySnapshot.data())
-                console.log(session)
-            });
+            console.log(session)
         }
     }, [session])
 
