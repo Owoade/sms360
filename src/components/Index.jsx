@@ -20,7 +20,7 @@ const Index = () => {
             const q = query(collection(db, "store"), where("email", "==", user_key));           
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
-                setSession({ ...each.data(), id: each.id })
+                setSession({ ...doc.data(), id: doc.id })
             });
 
 //                 setSession(querySnapshot.data())
